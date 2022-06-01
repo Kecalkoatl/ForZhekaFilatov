@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 public class Util extends Configs {
     // реализуйте настройку соеденения с БД
+    
+    private Util(){};
 
     private static Connection dbConnection;
 
