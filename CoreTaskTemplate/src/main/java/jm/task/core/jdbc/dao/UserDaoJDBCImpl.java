@@ -10,7 +10,6 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-   private Util util = new Util();
 
     public UserDaoJDBCImpl() {
     }
@@ -20,7 +19,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String SQL = "CREATE TABLE UserTable (" + Const.USER_ID + " INTEGER NOT NULL AUTO_INCREMENT, " + Const.USER_FIRSTNAME + " VARCHAR(30) not null, " + Const.USER_LASTNAME
                 + " VARCHAR(30) NOT NULL, " + Const.USER_AGE + " INTEGER NOT NULL, PRIMARY KEY (" + Const.USER_ID + ") );";
 
-        try (Statement statement = util.getDbConnection().createStatement()) {
+        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
 
             statement.executeUpdate(SQL);
 
@@ -35,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String SQL = "DROP TABLE " + Const.USER_TABLE;
 
-        try (Statement statement = util.getDbConnection().createStatement();) {
+        try (Statement statement = Util.getInstance().getDbConnection().createStatement();) {
 
             statement.executeUpdate(SQL);
 
@@ -55,7 +54,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 Const.USER_AGE + ")"
                 + "VALUES (?,?,?)";
 
-        try (PreparedStatement prSt = util.getDbConnection().prepareStatement(insert);
+        try (PreparedStatement prSt = Util.getInstance().getDbConnection().prepareStatement(insert);
         ) {
 
             prSt.setString(1, name);
@@ -77,7 +76,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String delete = "DELETE FROM " + Const.USER_TABLE + " WHERE " + Const.USER_ID + "=" + id;
 
-        try (Statement statement = util.getDbConnection().createStatement()) {
+        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
 
             statement.executeUpdate(delete);
 
@@ -92,11 +91,11 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
 
         List<User> userList = new ArrayList<>();
-        String qwery = "SELECT * FROM " + Const.USER_TABLE;
+        String query = "SELECT * FROM " + Const.USER_TABLE;
 
-        try (Statement statement = util.getDbConnection().createStatement()) {
+        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
 
-            ResultSet resultSet = statement.executeQuery(qwery);
+            ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
                 User user = new User();
@@ -121,7 +120,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String cleanTable = "DELETE FROM " + Const.USER_TABLE;
 
-        try (Statement statement = util.getDbConnection().createStatement()) {
+        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
 
             statement.executeUpdate(cleanTable);
 

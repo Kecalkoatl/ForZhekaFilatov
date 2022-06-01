@@ -1,35 +1,26 @@
 package jm.task.core.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import jm.task.core.jdbc.dao.Const;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
-import jm.task.core.jdbc.util.Util;
 
 public class Main {
     public static void main(String[] args) {
 
         // реализуйте алгоритм здесь
 
-        UserServiceImpl US = new UserServiceImpl();
+        UserServiceImpl userService = new UserServiceImpl();
 
-        US.createUsersTable();
+        userService.createUsersTable();
 
-        US.saveUser("Vovpen", "Knyaza", (byte) 24);
-        US.saveUser("Vanpen", "Levcha", (byte) 24);
-        US.saveUser("Irpen", "Snezhiha", (byte) 0);
-        US.saveUser("Elpen", "Pashkek", (byte) 24);
+        userService.saveUser("Vovpen", "Knyaza", (byte) 24);
+        userService.saveUser("Vanpen", "Levcha", (byte) 24);
+        userService.saveUser("Irpen", "Snezhiha", (byte) 0);
+        userService.saveUser("Elpen", "Pashkek", (byte) 24);
 
-        System.out.println(US.getAllUsers());
+        System.out.println(userService.getAllUsers());
 
-        US.cleanUsersTable();
+        userService.cleanUsersTable();
 
-        US.dropUsersTable();
+        userService.dropUsersTable();
 
     }
 }

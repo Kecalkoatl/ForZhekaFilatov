@@ -4,26 +4,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Util extends Configs{
+public class Util extends Configs {
     // реализуйте настройку соеденения с БД
-    Connection dbConnection;
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private Util() {
+    }
 
+    private static Util instance;
 
+    public static Util getInstance() {
+        if (instance == null) {
+            instance = new Util();
+        }
+        return instance;
+    }
+
+    private Connection dbConnection;
 
     public Connection getDbConnection() throws ClassNotFoundException, SQLException {
 
         String connectionString = "jdbc:mysql://localhost:3306/javamentos";
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName(JDBC_DRIVER);
 
 
         dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
 
         return dbConnection;
     }
-
 
 
 }
