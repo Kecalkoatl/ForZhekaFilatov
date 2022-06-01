@@ -7,28 +7,18 @@ import java.sql.SQLException;
 public class Util extends Configs {
     // реализуйте настройку соеденения с БД
 
-    private Util() {
-    }
+    private static Connection dbConnection;
 
-    private static Util instance;
+    public static Connection getDbConnection() throws ClassNotFoundException, SQLException {
 
-    public static Util getInstance() {
-        if (instance == null) {
-            instance = new Util();
+        if (dbConnection == null) {
+            String connectionString = "jdbc:mysql://localhost:3306/javamentos";
+
+            Class.forName(JDBC_DRIVER);
+
+
+            dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
         }
-        return instance;
-    }
-
-    private Connection dbConnection;
-
-    public Connection getDbConnection() throws ClassNotFoundException, SQLException {
-
-        String connectionString = "jdbc:mysql://localhost:3306/javamentos";
-
-        Class.forName(JDBC_DRIVER);
-
-
-        dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
 
         return dbConnection;
     }

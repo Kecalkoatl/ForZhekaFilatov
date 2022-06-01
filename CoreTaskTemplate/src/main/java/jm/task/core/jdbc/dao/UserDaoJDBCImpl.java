@@ -19,7 +19,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String SQL = "CREATE TABLE UserTable (" + Const.USER_ID + " INTEGER NOT NULL AUTO_INCREMENT, " + Const.USER_FIRSTNAME + " VARCHAR(30) not null, " + Const.USER_LASTNAME
                 + " VARCHAR(30) NOT NULL, " + Const.USER_AGE + " INTEGER NOT NULL, PRIMARY KEY (" + Const.USER_ID + ") );";
 
-        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
+        try (Statement statement = Util.getDbConnection().createStatement()) {
 
             statement.executeUpdate(SQL);
 
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String SQL = "DROP TABLE " + Const.USER_TABLE;
 
-        try (Statement statement = Util.getInstance().getDbConnection().createStatement();) {
+        try (Statement statement = Util.getDbConnection().createStatement();) {
 
             statement.executeUpdate(SQL);
 
@@ -54,7 +54,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 Const.USER_AGE + ")"
                 + "VALUES (?,?,?)";
 
-        try (PreparedStatement prSt = Util.getInstance().getDbConnection().prepareStatement(insert);
+        try (PreparedStatement prSt = Util.getDbConnection().prepareStatement(insert);
         ) {
 
             prSt.setString(1, name);
@@ -76,7 +76,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String delete = "DELETE FROM " + Const.USER_TABLE + " WHERE " + Const.USER_ID + "=" + id;
 
-        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
+        try (Statement statement = Util.getDbConnection().createStatement()) {
 
             statement.executeUpdate(delete);
 
@@ -93,7 +93,7 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> userList = new ArrayList<>();
         String query = "SELECT * FROM " + Const.USER_TABLE;
 
-        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
+        try (Statement statement = Util.getDbConnection().createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(query);
 
@@ -120,7 +120,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String cleanTable = "DELETE FROM " + Const.USER_TABLE;
 
-        try (Statement statement = Util.getInstance().getDbConnection().createStatement()) {
+        try (Statement statement = Util.getDbConnection().createStatement()) {
 
             statement.executeUpdate(cleanTable);
 
