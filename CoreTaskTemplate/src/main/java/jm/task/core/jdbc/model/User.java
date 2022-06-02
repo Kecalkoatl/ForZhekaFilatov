@@ -1,21 +1,24 @@
 package jm.task.core.jdbc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jm.task.core.jdbc.util.Const;
 
-@Table
+
+@Entity
+@Table(name = Const.USER_TABLE)
 public class User {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = Const.USER_ID)
     private Long id;
 
-    @Column
+    @Column(name = Const.USER_FIRSTNAME)
     private String name;
 
-    @Column
+    @Column (name = Const.USER_LASTNAME)
     private String lastName;
 
-    @Column
+    @Column (name = Const.USER_AGE)
     private Byte age;
 
     public User() {
@@ -38,7 +41,6 @@ public class User {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
